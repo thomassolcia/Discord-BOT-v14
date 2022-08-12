@@ -65,7 +65,7 @@ module.exports = class BotInfoCommand extends Command {
       components: [
         this.client.ButtonRow([
           {
-            url: "https://github.com/thomassolcia",
+            url: "https://github.com/thomassolcia/Discord-BOT-v14",
             label: "GitHub",
             style: "LINK",
             emoji: "<:Github:995795578510385322>",
