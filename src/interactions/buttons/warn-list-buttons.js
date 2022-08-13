@@ -22,40 +22,37 @@ module.exports = class warnListButton extends Button {
 
     const member = guild.members.cache.get(userId);
 
-    switch (button.customId) {
-      case "warns-list":
-        let warnList = "";
-        let i = filteredUser.length + 1;
-        let s = 1;
+    let warnList = "";
+    let i = filteredUser.length + 1;
+    let s = 1;
 
-        filteredUser
-          .slice()
-          .reverse()
-          .forEach((warn) => {
-            i--;
-            s++;
-            if (s > 10) return;
-            warnList += `\n**${i}:** por <@${
-              warn.moderator
-            }> - ${this.client.Formatter(warn.date, "R")}\n`;
-            warnList += `Motivo: \`${warn.reason}\`\n`;
-          });
+    filteredUser
+      .slice()
+      .reverse()
+      .forEach((warn) => {
+        i--;
+        s++;
+        if (s > 10) return;
+        warnList += `\n**${i}:** por <@${
+          warn.moderator
+        }> - ${this.client.Formatter(warn.date, "R")}\n`;
+        warnList += `Motivo: \`${warn.reason}\`\n`;
+      });
 
-        return button.editReply({
-          embeds: [
-            this.client
-              .Embed()
-              .setAuthor({
-                name: `Avisos de ${member.user.tag} 🔨`,
-                iconURL: member.user.avatarURL({ dynamic: true }),
-              })
-              .setDescription(warnList)
-              .setTimestamp()
-              .setFooter({
-                text: `${member.user.tag} - ${member.user.id}`,
-              }),
-          ],
-        });
-    }
+    return button.editReply({
+      embeds: [
+        this.client
+          .Embed()
+          .setAuthor({
+            name: `Avisos de ${member.user.tag} 🔨`,
+            iconURL: member.user.avatarURL({ dynamic: true }),
+          })
+          .setDescription(warnList)
+          .setTimestamp()
+          .setFooter({
+            text: `${member.user.tag} - ${member.user.id}`,
+          }),
+      ],
+    });
   }
 };

@@ -88,7 +88,7 @@ module.exports = class WarnCommand extends Command {
       case "adicionar":
         reason = options.getString("motivo");
         const userArray = fetchGuild.logs.users;
-        const cases = fetchGuild.logs.users.map((u) => u.case);
+        const cases = userArray.users.map((u) => u.case);
         const highestCase = Math.max(...cases);
         let d = new Date();
         const user = {
