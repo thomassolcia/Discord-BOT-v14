@@ -21,7 +21,7 @@ module.exports = class Ready extends Event {
 
     let index = 0;
     const activities = [
-      { type: ActivityType.Listening, name: "/help", details: "para mais informações" },
+      { type: ActivityType.Listening, name: "/ajuda", details: "para mais informações" },
       { type: ActivityType.Listening, name: "/configurar" },
     ];
 

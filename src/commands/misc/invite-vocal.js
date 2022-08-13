@@ -4,11 +4,11 @@ const { ApplicationCommandOptionType } = require("discord.js");
 module.exports = class InviteVocalCommand extends Command {
   constructor(client) {
     super(client, {
-      name: "invite-vc",
+      name: "convidar-cv",
       type: "SLASH_COMMAND",
       description: "💌 Convide alguém para o seu canal de voz",
       examples:
-        "/invite-vc `member:@awoone#0001` => 📧 Envie um convite para se conectar no seu canal de voz",
+        "/convidar-cv `member:@awoone#0001` => 📧 Envie um convite para se conectar no seu canal de voz",
       category: "Diversos",
       userPermissions: ["SendMessages"],
       clientPermissions: ["SendMessages"],       

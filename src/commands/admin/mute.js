@@ -58,6 +58,8 @@ module.exports = class MuteCommand extends Command {
 
     const member = options.getMember("usuario");
     if (!member) return interaction.editReply(`\`🚫\` Não consigo encontrar esse usuário.`);
+    if (member.permissions.has("ManageGuild"))
+      return interaction.editReply(`\`🚫\` Eu não posso silenciar este usuário.`);
     const format = options.getString("formato");
     const duration =
       format === "minutos"

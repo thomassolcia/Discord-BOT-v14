@@ -4,9 +4,9 @@ const { ApplicationCommandOptionType } = require("discord.js");
 module.exports = class HelpCommand extends Command {
   constructor(client) {
     super(client, {
-      name: "help",
+      name: "ajuda",
       description: "🔍 Obtenha a lista de comandos",
-      examples: "/help `comando:ping` => 🔍 Obtenha detalhes sobre o comando `ping`",
+      examples: "/ajuda `comando:ping` => 🔍 Obtenha detalhes sobre o comando `ping`",
       category: "Diversos",
       userPermissions: ["SendMessages"],
       clientPermissions: ["SendMessages"],       
@@ -75,7 +75,7 @@ module.exports = class HelpCommand extends Command {
       })
 
       .setFooter({
-        text: `/help comando: para obter informações sobre um comando específico.`,
+        text: `/ajuda comando: para obter informações sobre um comando específico.`,
       });
 
     for (const category of categories) {

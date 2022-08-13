@@ -4,10 +4,10 @@ const { ApplicationCommandOptionType, ChannelType } = require("discord.js");
 module.exports = class UnlockCommand extends Command {
   constructor(client) {
     super(client, {
-      name: "unlock",
+      name: "destravar",
       description: "🔓 Desbloqueia o canal atual.",
       examples:
-        "/unlock `canal:#geral` => 🔓 Permita que os usuários enviem mensagens em #geral.",
+        "/destravar `canal:#geral` => 🔓 Permita que os usuários enviem mensagens em #geral.",
       category: "Administrativos",
       userPermissions: ["ManageChannels"],
       clientPermissions: ["ManageChannels"],

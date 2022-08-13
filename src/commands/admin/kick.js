@@ -4,9 +4,9 @@ const { ApplicationCommandOptionType } = require("discord.js");
 module.exports = class KickCommand extends Command {
   constructor(client) {
     super(client, {
-      name: "kick",
+      name: "expulsar",
       description: "🔪 Expulsar um usuário do servidor.",
-      examples: "/kick `usuario:@awoone#0001` => 🔪 Expulsar awoone do servidor.",
+      examples: "/expulsar `usuario:@awoone#0001` => 🔪 Expulsar awoone do servidor.",
       category: "Administrativos",
       userPermissions: ["KickMembers"],
       clientPermissions: ["KickMembers"],

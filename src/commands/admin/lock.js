@@ -4,10 +4,10 @@ const { ApplicationCommandOptionType, ChannelType } = require("discord.js");
 module.exports = class LockCommand extends Command {
   constructor(client) {
     super(client, {
-      name: "lock",
+      name: "trancar",
       description: "🔒 Bloquear o canal atual.",
       examples:
-        "/lock `canal:#geral` => 🔒 Proibir usuários de enviar mensagens em #geral.",
+        "/trancar `canal:#geral` => 🔒 Proibir usuários de enviar mensagens em #geral.",
       category: "Administrativos",
       userPermissions: ["ManageChannels"],
       clientPermissions: ["ManageChannels"],
@@ -56,7 +56,7 @@ module.exports = class LockCommand extends Command {
     }
 
     interaction.editReply(
-      `\`🔒\` O canal ${channel.toString()} foi bloqueado.\n\n> Utilize \`/unlock\` para desbloquear.`
+      `\`🔒\` O canal ${channel.toString()} foi bloqueado.\n\n> Utilize \`/destravar\` para desbloquear.`
     );
 
     if (!logsChannel || !enabledLogs.includes("channels")) return;

@@ -102,7 +102,6 @@ module.exports = class SlowCommand extends Command {
               }),
             })
             .setDescription(
-              `${channel.toString()} slowmode foi configurado para \`${time} ${format}\`.`
               `${channel.toString()} ${
                 time !== 0
                   ? `slowmode foi configurado para \`${time} ${format}\`\n\n Utilize \`/unslow\` para desativar`

@@ -4,9 +4,9 @@ const { ApplicationCommandOptionType } = require("discord.js");
 module.exports = class BanCommand extends Command {
   constructor(client) {
     super(client, {
-      name: "ban",
+      name: "banir",
       description: "🔪 Banir um membro do servidor.",
-      examples: "/ban `user:@awoone#0001` => 🔪 Banir awoone do servidor.",
+      examples: "/banir `usuario:@awoone#0001` `dias:3` => 🔪 Banir `@awoone#0001` do servidor e deletar suas mensagens dos últimos `3 dias`",
       category: "Administrativos",
       userPermissions: ["BanMembers"],
       clientPermissions: ["BanMembers"],
@@ -17,7 +17,14 @@ module.exports = class BanCommand extends Command {
           description: "👤 Usuário para banir",
           required: true,
         },
-
+        {
+          type: ApplicationCommandOptionType.Integer,
+          name: "dias",
+          description: "❌ Dias para excluir as mensagens",
+          required: true,
+          min_value: 0,
+          max_value: 7,
+        },        
         {
           type: ApplicationCommandOptionType.String,
           name: "motivo",
@@ -33,6 +40,7 @@ module.exports = class BanCommand extends Command {
 
     const member = options.getMember("usuario");
     if (!member) return interaction.editReply(`\`🚫\` Não consigo encontrar esse usuário.`);
+    const deleteDays = options.getInteger("dias");
     const reason = options.getString("motivo");
 
     const fetchGuild = await this.client.getGuild(guild);
@@ -41,6 +49,7 @@ module.exports = class BanCommand extends Command {
 
     try {
       await member.ban({
+        deleteMessageDays: deleteDays,
         reason: `por ${interaction.member.user.tag}${
           reason ? ": " + reason : ""
         }`,
@@ -52,8 +61,8 @@ module.exports = class BanCommand extends Command {
     }
 
     interaction.editReply(
-      `\`🔪\` ${member.toString()} foi banido do servidor.${
-        reason ? `\n\n\n> Motivo: \`${reason}\`` : ""
+      `\`🔪\` ${member.toString()} foi banido do servidor.\n\n> \`${deleteDays}\` dias de mensagens também foram limpos${
+        reason ? `\n> Motivo: \`${reason}\`` : ""
       }`
     );
 
@@ -70,10 +79,16 @@ module.exports = class BanCommand extends Command {
               }),
             })
             .setDescription(member.toString() + " foi banido.")
-            .addFields({
-              name: "Motivo",
-              value: `${reason || "Nenhum motivo foi dado"}`,
-            })
+            .addFields(
+              {
+                name: "Mensagens deletadas",
+                value: `${deleteDays} dias`,
+              },
+              {
+                name: "Motivo",
+                value: `${reason || "Nenhum motivo foi dado"}`,
+              }
+            )
             .setThumbnail(member.displayAvatarURL({ dynamic: true }))
             .setColor("#b72a2a")
             .setTimestamp()

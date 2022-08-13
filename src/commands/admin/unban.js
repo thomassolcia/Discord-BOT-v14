@@ -4,10 +4,10 @@ const { ApplicationCommandOptionType } = require("discord.js");
 module.exports = class UnBanCommand extends Command {
   constructor(client) {
     super(client, {
-      name: "unban",
+      name: "desbanir",
       description: "🔪 Desbane um membro do servidor.",
       examples:
-        "/unban `usuario:@awoone#0001` => 🔪 Desbane awoone do servidor.",
+        "/desbanir `usuario:@awoone#0001` => 🔪 Desbane awoone do servidor.",
       category: "Administrativos",
       userPermissions: ["BanMembers"],
       clientPermissions: ["BanMembers"],

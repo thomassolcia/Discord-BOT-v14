@@ -4,10 +4,10 @@ const { ApplicationCommandOptionType } = require("discord.js");
 module.exports = class WarnCommand extends Command {
   constructor(client) {
     super(client, {
-      name: "warn",
+      name: "aviso",
       description: "🔨 Avisa um usuário.",
       examples:
-      "/warn adicionar `usuario:@awoone#0001` `motivo:algum motivo` => 🔨 Avisa o `@awoone#0001` por `algum motivo`",
+      "/aviso adicionar `usuario:@awoone#0001` `motivo:algum motivo` => 🔨 Avisa o `@awoone#0001` por `algum motivo`",
       category: "Administrativos",
       userPermissions: ["ModerateMembers"],
       clientPermissions: ["ModerateMembers"],
@@ -46,13 +46,13 @@ module.exports = class WarnCommand extends Command {
               type: ApplicationCommandOptionType.Number,
               name: "numero",
               description:
-                "🔢 O número do aviso a ser removido (see /warn lista)",
+                "🔢 O número do aviso a ser removido (confirme em /aviso lista)",
               required: true,
             },
             {
               type: ApplicationCommandOptionType.String,
               name: "motivo",
-              description: "❔ Reason for the warn removal",
+              description: "❔ Motivo para remover o aviso",
             },
           ],
         },
