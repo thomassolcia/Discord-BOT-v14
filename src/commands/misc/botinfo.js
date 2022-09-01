@@ -4,9 +4,9 @@ const botVersion = require("../../../package.json").version;
 module.exports = class BotInfoCommand extends Command {
   constructor(client) {
     super(client, {
-      name: "botinfo",
+      name: "bot",
       description: "🔖 Obtenha informações sobre o bot",
-      examples: "/botinfo => Obtenha o tempo de atividade do bot e a contagem de servidores",
+      examples: "/bot => Obtenha o tempo de atividade do bot e a contagem de servidores",
       category: "Diversos",
       userPermissions: ["SendMessages"],
       clientPermissions: ["SendMessages"],  

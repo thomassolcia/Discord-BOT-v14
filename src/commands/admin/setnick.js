@@ -4,10 +4,10 @@ const { ApplicationCommandOptionType } = require("discord.js");
 module.exports = class SetNicknameCommand extends Command {
   constructor(client) {
     super(client, {
-      name: "nick",
+      name: "apelido",
       description: "✍️ Altera o apelido de um usuário.",
       examples:
-        "/setnick `usuario:@awoone#0001` `apelido:awo` => ✍️ Altera o apelido do usuário @awoone#0001 para awo.",
+        "/apelido `usuario:@awoone#0001` `apelido:awo` => ✍️ Altera o apelido do usuário @awoone#0001 para awo.",
       category: "Administrativos",
       userPermissions: ["ManageNicknames"],
       clientPermissions: ["ManageNicknames"],

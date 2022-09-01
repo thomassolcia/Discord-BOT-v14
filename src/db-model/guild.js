@@ -4,6 +4,13 @@ const guildSchema = new mongoose.Schema({
   id: String,
   language: { type: String, default: "en" },
 
+  moderationTools: {
+    enabled: {
+      type: Array,
+      default: ["blacklist"],
+    },
+  },
+
   logs: {
     channel: { type: String, default: null },
     enabled: {
@@ -37,21 +44,6 @@ const guildSchema = new mongoose.Schema({
   blackList: {
     time: { type: Number, default: 86400000 },
     minAge: { type: Number, default: 3600000 },
-  },
-
-  joinToCreate: {
-    names: {
-      type: Array,
-      default: [
-        "🗻 Everest",
-        "🌉 San Francisco",
-        "🌅 Bahamas",
-        "💳 VIP Room",
-        "🏰 Peach Castle",
-      ],
-    },
-    channel: { type: String, default: null },
-    activeChannels: { type: Array, default: [] },
   },
 });
 

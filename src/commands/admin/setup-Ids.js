@@ -809,6 +809,25 @@ module.exports = class SetupBotCommand extends Command {
       case "blacklist":
         if (!(await this.client.Defer(interaction))) return;
 
+        const blacklistState =
+          fetchGuild.moderationTools.enabled.includes("blacklist");
+        if (!blacklistState) {
+          return interaction.editReply({
+            content:
+              "`🛡️` O recurso da blacklist está desativado\n\n> Deseja ativá-lo??",
+            components: [
+              this.client.ButtonRow([
+                {
+                  customId: "blacklist-tool",
+                  label: "",
+                  style: "SUCCESS",
+                  emoji: "✅",
+                },
+              ]),
+            ],
+          });
+        }
+
         const choice = options.getString("escolha");
         const format = options.getString("formato");
         const time =
@@ -829,7 +848,7 @@ module.exports = class SetupBotCommand extends Command {
         }
 
         return interaction.editReply({
-          content: `\`🔒\` ${this.client.Capitalize(
+          content: `\`🛡️\` ${this.client.Capitalize(
             choice.replace(/_/g, " ")
           )} agora está definido para: \`${this.client.PrettyMs(time, {
             verbose: true,

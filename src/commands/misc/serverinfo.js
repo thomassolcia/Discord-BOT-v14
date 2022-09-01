@@ -3,9 +3,9 @@ const { Command } = require("sheweny");
 module.exports = class ServerInfoCommand extends Command {
   constructor(client) {
     super(client, {
-      name: "serverinfo",
+      name: "servidor",
       description: "⛲ Obtenha informações sobre o servidor.",
-      examples: "/serverinfo => Obtenha informações do servidor",
+      examples: "/servidor => Obtenha informações do servidor",
       category: "Diversos",
       userPermissions: ["SendMessages"],
       clientPermissions: ["SendMessages"],       

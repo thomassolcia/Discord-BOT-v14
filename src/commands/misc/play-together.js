@@ -5,9 +5,9 @@ const { ApplicationCommandOptionType } = require("discord.js");
 module.exports = class PlayTogetherCommand extends Command {
   constructor(client) {
     super(client, {
-      name: "play",
+      name: "iniciar",
       examples:
-        "/play `atividade:📽️ Youtube` => Assista o Youtube em grupo.",
+        "/iniciar `atividade:📽️ Youtube` => Assista o Youtube em grupo.",
       description: "🎮 Reproduza atividades ocultas do Discord em um canal de voz",
       category: "Diversos",
       userPermissions: ["SendMessages"],

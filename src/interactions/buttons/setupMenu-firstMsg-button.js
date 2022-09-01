@@ -22,29 +22,35 @@ module.exports = class SetupMenuButton extends Button {
           "Qual recurso você deseja configurar?",
           [
             {
-              label: "Configuração dos Canais",
+              label: "Canais",
               description: "NECESSÁRIO - Configure os canais utilizados pelo bot.",
               value: "channel_option",
               emoji: "📚",
             },
             {
-              label: "Configuração de Cargos",
+              label: "Reivindicação de Cargos",
               description: "OPCIONAL - Permita que os usuários reivindiquem cargos a partir de uma mensagem",
               value: "roleclaim_option",
               emoji: "🗂️",
             },
             {
-              label: "Configuração de Cargos Automatizados",
+              label: "Cargos Automatizados",
               description: "OPCIONAL - Dê cargos aos novos usuários",
               value: "autorole_option",
               emoji: "🎩",
             },
             {
-              label: "Configuração de Blacklist",
+              label: "Blacklist",
               description:
                 "OPCIONAL - Proteja o servidor contra bots, golpes, etc..",
               value: "blacklist_option",
               emoji: "🛡️",
+            },
+            {
+              label: "Ferramentas de Moderação",
+              description: "OPCIONAL - Ative ou desative recursos de moderação",
+              value: "moderation_option",
+              emoji: "🗡️",
             },
           ]
         ),

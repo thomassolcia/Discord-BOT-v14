@@ -15,6 +15,8 @@ module.exports = class guildMemberAddTracker extends Event {
     const fetchGuild = await this.client.getGuild(guild);
     const logsChannel = this.client.channels.cache.get(fetchGuild.logs.channel);
     const enabledLogs = fetchGuild.logs.enabled;
+    const blacklistState =
+      fetchGuild.moderationTools.enabled.includes("blacklist");
 
     if (logsChannel && enabledLogs.includes("joinLeave")) {
       let warn = false;
@@ -44,7 +46,7 @@ module.exports = class guildMemberAddTracker extends Event {
           text: `${member.user.tag} - ${member.user.id}`,
         });
 
-      if (warn) {
+      if (warn && blacklistState) {
         member.timeout(blacklistTime);
         EmbedInfo.setTitle("Conta temporariamente na blacklist")
           .setDescription(

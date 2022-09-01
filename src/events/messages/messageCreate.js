@@ -10,14 +10,19 @@ module.exports = class messageCreateTracker extends Event {
   async execute(message) {
     const { guild, channel, member } = message;
 
-    if (!member) return;
+    if (!member || message.author.bot) return;
 
-    if ( 1 == 2
-      //(message.content.includes("discord.gg/") ||
-      //  message.content.includes("discord.com/invite/")) &&
-      //(!message.author.bot || !member.permissions.has("ManageMessages"))
+    if (
+      (message.content.includes("discord.gg/") ||
+        message.content.includes("discord.com/invite/")) &&
+      !member.permissions.has("ManageMessages")
     ) {
       const fetchGuild = await this.client.getGuild(guild);
+      const delDcInvitesState =
+        fetchGuild.moderationTools.enabled.includes("delDcInvites");
+      if (!delDcInvitesState) return;
+
+      message.delete();
 
       const logsChannel = this.client.channels.cache.get(
         fetchGuild.logs.channel
@@ -25,8 +30,6 @@ module.exports = class messageCreateTracker extends Event {
       const enabledLogs = fetchGuild.logs.enabled;
 
       if (logsChannel && enabledLogs.includes("moderation")) {
-        message.delete();
-
         return logsChannel
           .send({
             embeds: [
