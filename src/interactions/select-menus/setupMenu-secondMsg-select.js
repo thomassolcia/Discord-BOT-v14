@@ -17,9 +17,6 @@ module.exports = class SetupMenu2MsgSelect extends SelectMenu {
         const membercountChannel = guild.channels.cache.get(
           fetchGuild.memberCount.channel
         );
-        const JTCChannel = guild.channels.cache.get(
-          fetchGuild.joinToCreate.channel
-        );
 
         selectMenu.editReply({
           content: `${
@@ -90,19 +87,33 @@ module.exports = class SetupMenu2MsgSelect extends SelectMenu {
       case "blacklist_option":
         const blacklistTime = fetchGuild.blackList.time;
         const blacklistMinAge = fetchGuild.blackList.minAge;
+        const blacklistState =
+        fetchGuild.moderationTools.enabled.includes("blacklist");
+
+        if (!blacklistState) {
+          return selectMenu.editReply({
+            content:
+              "`🛡️` O recurso da blacklist está desativado\n\n> Deseja ativá-lo?",
+            components: [
+              this.client.ButtonRow([
+                {
+                  customId: "blacklist-tool",
+                  label: "",
+                  style: "SUCCESS",
+                  emoji: "✅",
+                },
+              ]),
+            ],
+          });
+        }
 
         return selectMenu.editReply({
           content: `\`🛡️\` **Blacklist** é um recurso que **impede que contas recém-criadas entrem no seu servidor**. Novas contas geralmente são **bots, golpes ou anúncios** que podem ser usados ​​de forma maliciosa para **prejudicar os usuários do servidor**.\n\nA blacklist é **ativado por padrão**, você pode alterar os tempos de acordo com **suas necessidades**:\n> \`Tempo da blacklist: ${this.client.PrettyMs(
             blacklistTime,
-            {
-              verbose: true,
-            }
           )}\` ${
             blacklistTime == 86400000 ? " (padrão)" : ""
           }\n> ↪ *altere por quanto tempo o bot bloqueará o usuário novo*
-          > \`Idade obrigatória da conta: ${this.client.PrettyMs(blacklistMinAge, {
-            verbose: true,
-          })}\` ${
+          > \`Idade obrigatória da conta: ${this.client.PrettyMs(blacklistMinAge)}\` ${
             blacklistMinAge == 3600000 ? " (padrão)" : ""
           }\n> ↪ *altere a idade mínima que um novo usuário deve ter para entrar no servidor.*
            \n\`⏱️\` Para alterar esse valores, utilize o comando \`/configurar blacklist\`.`,
@@ -171,7 +182,37 @@ module.exports = class SetupMenu2MsgSelect extends SelectMenu {
               },
             ]),
           ],
-        });
+        }); 
+
+      case "moderation_option":
+        const moderationTools = fetchGuild.moderationTools;
+
+        return selectMenu.editReply({
+          components: [
+            this.client.SelectMenuRow(
+              "moderation-tools-select",
+              "Gerencie suas ferramentas",
+              [
+                {
+                  label: "Blacklist",
+                  description: "Proteja seu servidor contra bots, golpes, etc.",
+                  value: "blacklist",
+                  emoji: "🛡️",
+                  default: moderationTools.enabled.includes("blacklist"),
+                },
+                {
+                  label: "Bloqueador de convites",
+                  description:
+                    "Exclui automaticamente os convites enviados por não moderadores",
+                  value: "delDcInvites",
+                  emoji: "🔗",
+                  default: moderationTools.enabled.includes("delDcInvites"),
+                },
+              ],
+              { min: 0, max: 2 }
+            ),
+          ],
+        });        
     }
   }
 };
