@@ -151,7 +151,7 @@ module.exports = class SetupMenu2MsgSelect extends SelectMenu {
             this.client.ButtonRow([
               {
                 customId: "create-roleclaim",
-                label: `Criado em ${selectMenu.channel.name}`,
+                label: `Criar em ${selectMenu.channel.name}`,
                 style: "SUCCESS",
                 emoji: "🗂️",
               },
